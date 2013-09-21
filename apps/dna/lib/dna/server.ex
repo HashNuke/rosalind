@@ -30,19 +30,19 @@ defmodule Dna.Server do
     {:noreply, fresh_state}
   end
 
+  def handle_cast("A", [a: a, c: c, g: g, t: t]) do
+    {:noreply, [a: a + 1, c: c, g: g, t: t] }
+  end
 
-  def handle_cast(alphabet, [a: a, c: c, g: g, t: t]) do
-    case alphabet do
-      "A" ->
-        new_state = [a: a + 1, c: c,     g: g,     t: t]
-      "C" ->
-        new_state = [a: a,     c: c + 1, g: g,     t: t]
-      "G" ->
-        new_state = [a: a,     c: c,     g: g + 1, t: t]
-      "T" ->
-        new_state = [a: a,     c: c,     g: g,     t: t + 1]
-    end
+  def handle_cast("C", [a: a, c: c, g: g, t: t]) do
+    {:noreply, [a: a, c: c + 1, g: g, t: t] }
+  end
 
-    {:noreply, new_state}
+  def handle_cast("G", [a: a, c: c, g: g, t: t]) do
+    {:noreply, [a: a, c: c, g: g + 1, t: t] }
+  end
+
+  def handle_cast("T", [a: a, c: c, g: g, t: t]) do
+    {:noreply, [a: a, c: c, g: g, t: t + 1] }
   end
 end
